@@ -8,27 +8,29 @@ function convertToRoman(num) {
     return number.length;
   }
 
-  function breakItUp(numstr, digits) {
-    var brokenUpArray = [];
-    for (i = 0; i < digits; i++) {
-      brokenUpArray.push(numstr.charAt(i));
+  function identifyPlaceValues(numberString, numberOfDigits) {
+    var disassembledNumber = [];
+    for (i = 0; i < numberOfDigits; i++) { // Pushes digit in each of the place values into array (without zeroes)
+      disassembledNumber.push(numberString.charAt(i));
     }
 
-    if (digits > 1) {
-      var numberOfZeroes = digits - 1;
-      var zeroString = "0" * numberOfZeroes;
-      for (j = 0; j < digits - 1; j++) {
-        brokenUpArray[j] = brokenUpArray[j].concat(zeroString);
+    if (numberOfDigits > 1) {
+      var numberOfZeroes = numberOfDigits - 1;
+      var zeroString = "0".repeat(numberOfZeroes);
+      console.log(zeroString);
+      for (j = 0; j < numberOfDigits - 1; j++) { // Adds appropriate number of zeroes to place values
+        disassembledNumber[j] = disassembledNumber[j].concat(zeroString);
+        zeroString = zeroString.slice(0, -1);
       }
     }
-    return brokenUpArray;
+    return disassembledNumber;
   }
 
   var stringifiedNum = makeString(num);
-  var numberOfDigits = checkLength(stringifiedNum);
+  var digits = checkLength(stringifiedNum);
 
 
-  console.log(breakItUp(stringifiedNum, numberOfDigits));
+  console.log(identifyPlaceValues(stringifiedNum, digits));
 
 }
 
